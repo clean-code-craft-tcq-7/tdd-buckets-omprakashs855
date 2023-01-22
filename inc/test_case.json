@@ -1,0 +1,9 @@
+{
+    "Test Case":
+    [
+        {
+            "Input Array": [4, 5],
+            "Range Output" : "4-5, 2"
+        }
+    ]
+}
