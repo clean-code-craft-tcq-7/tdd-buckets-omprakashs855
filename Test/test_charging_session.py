@@ -12,13 +12,12 @@ class TestChargingSession(unittest.TestCase):
 
         # Creating ChargingSession Class Object
         obj = CS()
-
-        with open(obj.get_json_path(), "r") as jsonread:
-            json_data = json.load(jsonread)
+        
+        json_data = obj.get_json_data(obj.get_json_path(obj.test_case_json))
             
-            for dt in json_data[obj.json_tc]:
-                result = "<Here a function will be called using the json input data, to get_reading_count>"
-                self.assertEqual(result, dt[obj.range])
+        for dt in json_data[obj.json_tc]:
+            result = obj.get_reading_count(dt[obj.input])
+            self.assertEqual(result, dt[obj.range])
 
 if __name__ == "__main__":
     unittest.main()

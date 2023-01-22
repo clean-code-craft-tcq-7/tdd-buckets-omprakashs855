@@ -1,5 +1,6 @@
 import os
 import subprocess
+import json
 
 class ChargingSession:
     
@@ -10,32 +11,37 @@ class ChargingSession:
         self.input = "Input Array"
     
     # Pure Function Inside Class
-    def get_json_path(self):
+    def get_json_path(self, json_file_name):
         root_dir = subprocess.Popen(['git', 'rev-parse', '--show-toplevel'],
                                     stdout=subprocess.PIPE).communicate()[0].rstrip().decode('utf-8')
         for roots, _, files in os.walk(root_dir):
             for file in files:
-                if self.test_case_json ==  file:
+                if json_file_name ==  file:
                     return os.path.join(roots, file)
 
-    # Feature Specification functions
-    def sort_array(self):
-        # Function To Sort input array/list
-        pass
+    def get_json_data(self, json_path):
+        with open(json_path, "r") as jsonread:
+            json_data = json.load(jsonread)
+        return json_data
 
-    def get_range(self):
+    def get_range(self, sort_list):
         # To get range
-        pass
+        range_list = []
+        min_val = sort_list[0]
+        max_val = sort_list[1]
+        if (max_val-min_val) < 2:
+            range_list = sort_list
+        return range_list, min_val, max_val
 
-    def get_reading_count(self):
+    def get_reading_count(self, input_array):
+        # Sorting input array
+        input_array.sort()
+        range_list, min, max = self.get_range(input_array)
+        length_count = len(range_list)
         # Main function called by Test
-        pass
+        str_data = str(min) + "-" + str(max) + ", " + str(length_count)
+        return str_data
     
     def get_csv_format(self):
         # Print csv output data
         pass
-
-# if __name__== "__main__":
-#     obj = ChargingSession()
-#     a = obj.get_json_path()
-#     print(a)
