@@ -3,7 +3,11 @@
     [
         {
             "Input Array": [4, 5],
-            "Range Output" : "4-5, 2"
+            "Range Output" : ["4-5, 2"]
+        },
+        {
+            "Input Array": [3, 3, 5, 4, 10, 11, 12],
+            "Range Output": ["3-5, 4", "10-12, 3"]
         }
     ]
 }

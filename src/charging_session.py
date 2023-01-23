@@ -24,23 +24,39 @@ class ChargingSession:
             json_data = json.load(jsonread)
         return json_data
 
-    def get_range(self, sort_list):
+    def get_range(self, data):
         # To get range
         range_list = []
-        min_val = sort_list[0]
-        max_val = sort_list[1]
-        if (max_val-min_val) < 2:
-            range_list = sort_list
-        return range_list, min_val, max_val
+        while True:
+            if len(data) == 0:
+                break
+            else:
+                nested_list = []
+                min_idx = 0
+                max_idx = min_idx
+                for idx, val in enumerate(data):
+                    if (val - data[max_idx]) == 0:
+                        nested_list.append(val)
+                        pass
+                    elif (val - data[max_idx]) == 1:
+                        max_idx = idx
+                        nested_list.append(val)
+                    else:
+                        break
+                if len(data) == 1:
+                    break
+                data = data[idx:]
+                range_list.append(nested_list)
+        return range_list
 
     def get_reading_count(self, input_array):
-        # Sorting input array
-        input_array.sort()
-        range_list, min, max = self.get_range(input_array)
-        length_count = len(range_list)
-        # Main function called by Test
-        str_data = str(min) + "-" + str(max) + ", " + str(length_count)
-        return str_data
+        range_list = self.get_range(sorted(input_array))
+        out_string_list = []
+        for val in range_list:
+            out_string = str(min(val)) + "-" + str(max(val)) + ", " + str(len(val))
+            out_string_list.append(out_string)
+        print(out_string_list)
+        return out_string_list
     
     def get_csv_format(self):
         # Print csv output data
