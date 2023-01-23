@@ -9,11 +9,12 @@ class ChargingSession:
         self.json_tc = "Test Case"
         self.range = "Range Output"
         self.input = "Input Array"
-    
-    # Pure Function Inside Class
-    def get_json_path(self, json_file_name):
-        root_dir = subprocess.Popen(['git', 'rev-parse', '--show-toplevel'],
+        self.root_dir = subprocess.Popen(['git', 'rev-parse', '--show-toplevel'],
                                     stdout=subprocess.PIPE).communicate()[0].rstrip().decode('utf-8')
+    
+
+    # Pure Function Inside Class
+    def get_json_path(self, json_file_name, root_dir):
         for roots, _, files in os.walk(root_dir):
             for file in files:
                 if json_file_name ==  file:
@@ -24,40 +25,52 @@ class ChargingSession:
             json_data = json.load(jsonread)
         return json_data
 
+    def null_data_check(self, data):
+        if len(data) == 0:
+            return False
+        else:
+            return True
+    
     def get_range(self, data):
         # To get range
         range_list = []
-        while True:
-            if len(data) == 0:
-                break
-            else:
-                nested_list = []
-                min_idx = 0
-                max_idx = min_idx
-                for idx, val in enumerate(data):
-                    if (val - data[max_idx]) == 0:
-                        nested_list.append(val)
-                        pass
-                    elif (val - data[max_idx]) == 1:
-                        max_idx = idx
-                        nested_list.append(val)
-                    else:
-                        break
-                if len(data) == 1:
+        data_check_flag = self.null_data_check(data)
+        while data_check_flag:
+            nested_list = []
+            min_idx = 0
+            max_idx = min_idx
+            for idx, val in enumerate(data):
+                if (val - data[max_idx]) == 0:
+                    nested_list.append(val)
+                    pass
+                elif (val - data[max_idx]) == 1:
+                    max_idx = idx
+                    nested_list.append(val)
+                else:
                     break
-                data = data[idx:]
-                range_list.append(nested_list)
+            if len(data) == 1:
+                if max(range_list[-1]) != nested_list[-1]:
+                    range_list.append(nested_list)
+                break
+            data = data[idx:]
+            range_list.append(nested_list)
         return range_list
 
     def get_reading_count(self, input_array):
         range_list = self.get_range(sorted(input_array))
         out_string_list = []
         for val in range_list:
-            out_string = str(min(val)) + "-" + str(max(val)) + ", " + str(len(val))
+            if min(val) == max(val):
+                out_string = str(min(val)) + ", " + str(len(val))
+            else:
+                out_string = str(min(val)) + "-" + str(max(val)) + ", " + str(len(val))
             out_string_list.append(out_string)
-        print(out_string_list)
-        return out_string_list
+        
+        return self.get_csv_format(out_string_list)
     
-    def get_csv_format(self):
+    def get_csv_format(self, out_string_list):
+        print("Range, Reading")
+        for data in out_string_list:
+            print(data)
         # Print csv output data
-        pass
+        return out_string_list

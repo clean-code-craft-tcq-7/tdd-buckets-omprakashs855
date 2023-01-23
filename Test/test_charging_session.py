@@ -13,7 +13,7 @@ class TestChargingSession(unittest.TestCase):
         # Creating ChargingSession Class Object
         obj = CS()
         
-        json_data = obj.get_json_data(obj.get_json_path(obj.test_case_json))
+        json_data = obj.get_json_data(obj.get_json_path(obj.test_case_json, obj.root_dir))
             
         for dt in json_data[obj.json_tc]:
             result = obj.get_reading_count(dt[obj.input])
