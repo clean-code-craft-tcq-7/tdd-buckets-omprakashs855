@@ -38,28 +38,36 @@ class ChargingSession:
         else:
             return True
     
+    def last_single_data_break(self, data):
+        global range_list
+        if len(data) == 1:
+            if max(range_list[-1]) != data[-1]:
+                range_list.append(data)
+            return True
+        return False
+
+    def multiple_data_check(self, data, nested_list, max_idx):
+        for idx, val in enumerate(data):
+            if (val - data[max_idx]) == 0:
+                nested_list.append(val)
+            elif (val - data[max_idx]) == 1:
+                max_idx = idx
+                nested_list.append(val)
+            else:
+                break
+        return nested_list, idx
+
     def get_range(self, data):
         global range_list
         # To get range
         range_list = []
         data_check_flag = int(self.null_data_check(data)) * int(self.single_data_check(data))
         while bool(data_check_flag):
-            nested_list = []
-            min_idx = 0
-            max_idx = min_idx
-            for idx, val in enumerate(data):
-                if (val - data[max_idx]) == 0:
-                    nested_list.append(val)
-                    pass
-                elif (val - data[max_idx]) == 1:
-                    max_idx = idx
-                    nested_list.append(val)
-                else:
-                    break
-            if len(data) == 1:
-                if max(range_list[-1]) != nested_list[-1]:
-                    range_list.append(nested_list)
+            if self.last_single_data_break(data):
                 break
+            nested_list = []
+            max_idx = 0
+            nested_list, idx = self.multiple_data_check(data, nested_list, max_idx)
             data = data[idx:]
             range_list.append(nested_list)
         return range_list
