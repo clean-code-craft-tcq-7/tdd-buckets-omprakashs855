@@ -16,9 +16,8 @@ class ChargingSession:
     # Pure Function Inside Class
     def get_json_path(self, json_file_name, root_dir):
         for roots, _, files in os.walk(root_dir):
-            for file in files:
-                if json_file_name ==  file:
-                    return os.path.join(roots, file)
+            if json_file_name in files:
+                return os.path.join(roots, json_file_name)
 
     def get_json_data(self, json_path):
         with open(json_path, "r") as jsonread:
@@ -31,11 +30,20 @@ class ChargingSession:
         else:
             return True
     
+    def single_data_check(self, data):
+        global range_list
+        if len(data) == 1:
+            range_list.append(data)
+            return False
+        else:
+            return True
+    
     def get_range(self, data):
+        global range_list
         # To get range
         range_list = []
-        data_check_flag = self.null_data_check(data)
-        while data_check_flag:
+        data_check_flag = int(self.null_data_check(data)) * int(self.single_data_check(data))
+        while bool(data_check_flag):
             nested_list = []
             min_idx = 0
             max_idx = min_idx
