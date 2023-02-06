@@ -38,7 +38,63 @@
             "Min Amps" : 0,
             "Max Amps" : 10,
             "Output" : 7
-        } 
+        },
+        {
+            "Input Array" : [1,1,1,0,1,0,1,1,1,0,1,0],
+            "nth_bit_value" : 12,
+            "Min Amps" : 0,
+            "Max Amps" : 10,
+            "Output" : 10
+        },
+        {
+            "Input Array" : [0,0,1,0,1,0,0,0,1,0,1,0],
+            "nth_bit_value" : 12,
+            "Min Amps" : 0,
+            "Max Amps" : 10,
+            "Output" : 2
+        },
+        {
+            "Input Array" : [1,1,1,1,1,1,1,1,1,1,1,1],
+            "nth_bit_value" : 12,
+            "Min Amps" : 0,
+            "Max Amps" : 10,
+            "Output" : 10
+        },
+        {
+            "Input Array" : [0,0,0,0,0,0,0,0,0,0,0,0],
+            "nth_bit_value" : 12,
+            "Min Amps" : 0,
+            "Max Amps" : 10,
+            "Output" : 0
+        },
+        {
+            "Input Array" : [1,0,1,0,1,0,1,0,1,0],
+            "nth_bit_value" : 10,
+            "Min Amps" : -15,
+            "Max Amps" : 15,
+            "Output" : 5
+        },
+        {
+            "Input Array" : [1,1,1,1,1,1,1,1,1,1],
+            "nth_bit_value" : 10,
+            "Min Amps" : -15,
+            "Max Amps" : 15,
+            "Output" : 15
+        },
+        {
+            "Input Array" : [0,0,0,0,0,0,0,0,0,0],
+            "nth_bit_value" : 10,
+            "Min Amps" : -15,
+            "Max Amps" : 15,
+            "Output" : -15
+        },
+        {
+            "Input Array" : [0,1,1,0,0,0,0,1,1,1],
+            "nth_bit_value" : 10,
+            "Min Amps" : -15,
+            "Max Amps" : 15,
+            "Output" : -3
+        }
     ]
 
 }

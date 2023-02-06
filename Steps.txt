@@ -51,3 +51,4 @@ Step 1 : Creating a new json file with sample test result
 Step 2 : Adding a test function to check the result output, 
          make the test fail
 Step 3 : Create simplest code to make the test pass
+Step 4 : Adding more test, and modifying the code to test end point
