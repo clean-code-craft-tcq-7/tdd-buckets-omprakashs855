@@ -1,0 +1,54 @@
+Test Driven Extensions
+
+Current Sensing at high fidelity
+
+ - The current sensor has a 12-bit A2D converter.
+ - The sensor is capable of sensing a maximum temperature of 10 Amps.
+ - A reading of 0 means 0A and a reading of 4094 means 10 Amps.
+ - The readings in-between are linearly scaled.
+ - A reading of 4095 indicates an error.
+
+ - Your program needs to be compatible with 12-bit input. 
+   Assume that the 12-bit numbers are transmitted as an array of integers 
+   (no bit-level packing).
+
+responsibility of the extension
+
+Test driven development
+
+- Ignore the error readings
+- convert 12 bit input into Amps, and round off the result to nearest integers
+
+Test driven Integration
+
+ write a function to convert any bit of numbers to its corresponding value
+ write a function to take min value and max value of the binary convertor
+ write a function to ignore the error readings
+ write a function to convert absolute values
+ write a function to remove negative values, as we need the magnitude of the data
+     negative and positive only implecates the charging and discharging
+
+Step 1 : Write KPI and Test, make the test Fail
+Step 2 : Write Simplest Code to make the test pass
+Step 3 : Add more test, and modify the Code
+Step 4 : Additional Refactoring
+
+KPI : 
+take n bit data as input bit array, and convert the n bit array data into value
+
+Test Case Design (Data Driven development)
+{
+    "Input Array" : [1,0,1,0,1,0,1,0,1,0,1,0],
+    "nth_bit_value" : 12,
+    "Min Amps" : 0,
+    "Max Amps" : 10,
+    "Result" : 7
+} 
+
+Process Of Creating the Section
+
+Step 1 : Creating a new json file with sample test result
+Step 2 : Adding a test function to check the result output, 
+         make the test fail
+Step 3 : Create simplest code to make the test pass
+Step 4 : Adding more test, and modifying the code to test end point
