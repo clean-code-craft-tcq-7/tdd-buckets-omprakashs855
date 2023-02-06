@@ -29,5 +29,16 @@
             "Input Array": [],
             "Range Output": []
         }
+    ],
+    "Test Case A2D":
+    [
+        {
+            "Input Array" : [1,0,1,0,1,0,1,0,1,0,1,0],
+            "nth_bit_value" : 12,
+            "Min Amps" : 0,
+            "Max Amps" : 10,
+            "Output" : 7
+        } 
     ]
+
 }
