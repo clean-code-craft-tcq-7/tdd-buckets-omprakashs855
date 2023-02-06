@@ -1,5 +1,6 @@
 import os
 import math
+import sys
 
 class A2D_Convertor:
 
@@ -37,12 +38,29 @@ class A2D_Convertor:
             print("Resulting Charging Amplitude : {}".format(result_out))
         else:
             print("Resulting Discharging Amplitude : {}".format(result_out))
+    
+    def add_result_output(self, dt):
+        max_dec = self.max_A2D(dt["nth_bit_value"])
+        dec_val = self.A2D(dt["Input Array"])
+        result_output = self.round_off_val(dec_val, max_dec, dt["Max Amps"], dt["Min Amps"])
+        return result_output
+
+    def add_error_output(self, dt):
+        result_output = self.add_result_output(dt)
+        
+        if result_output > dt["Max Amps"]:
+            return "Error : Value More"
+        else:
+            return "Success : Value within Threshold"
+
 
     def get_current_conv_amp(self, dt):
         nth_bit_check = self.check_nth_bit_array_size(dt["nth_bit_value"], dt["Input Array"])
         if nth_bit_check:
-            max_dec = self.max_A2D(dt["nth_bit_value"])
-            dec_val = self.A2D(dt["Input Array"])
-            result_output = self.round_off_val(dec_val, max_dec, dt["Max Amps"], dt["Min Amps"])
+            result_output = self.add_result_output(dt)
             self.print_charging_status(result_output)
+        else:
+            print("Error : Input Array length is not equal to {}-bit".format(dt["nth_bit_value"]))
+            result_output = self.add_error_output(dt)
+            print(result_output)
         return result_output

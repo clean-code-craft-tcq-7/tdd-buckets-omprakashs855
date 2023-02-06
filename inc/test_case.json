@@ -94,6 +94,34 @@
             "Min Amps" : -15,
             "Max Amps" : 15,
             "Output" : -3
+        },
+        {
+            "Input Array" : [1,1,1,0,0,0,0,1,1,1,1],
+            "nth_bit_value" : 10,
+            "Min Amps" : -15,
+            "Max Amps" : 15,
+            "Output" : "Error : Value More"
+        },
+        {
+            "Input Array" : [0,0,1,0,0,0,0,1,1,1,1],
+            "nth_bit_value" : 10,
+            "Min Amps" : -15,
+            "Max Amps" : 15,
+            "Output" : "Success : Value within Threshold"
+        },
+        {
+            "Input Array" : [0,0,1,0,0,0,0,1,1,1,1],
+            "nth_bit_value" : 12,
+            "Min Amps" : -15,
+            "Max Amps" : 15,
+            "Output" : "Success : Value within Threshold"
+        },
+        {
+            "Input Array" : [1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+            "nth_bit_value" : 12,
+            "Min Amps" : -15,
+            "Max Amps" : 15,
+            "Output" : "Error : Value More"
         }
     ]
 
