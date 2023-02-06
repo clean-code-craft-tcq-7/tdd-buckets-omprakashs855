@@ -19,9 +19,9 @@ class TestChargingSession(unittest.TestCase):
         
         json_data = obj.get_json_data(obj.get_json_path(obj.test_case_json, obj.root_dir))
             
-        # for dt in json_data[obj.json_tc]:
-        #     result = obj.get_reading_count(dt[obj.input])
-        #     self.assertEqual(result, dt[obj.range])
+        for dt in json_data[obj.json_tc]:
+            result = obj.get_reading_count(dt[obj.input])
+            self.assertEqual(result, dt[obj.range])
         
         for dt_a2d in json_data[obj_a2d.json_tc_a2d]:
             result_a2d = obj_a2d.get_current_conv_amp(dt_a2d)
